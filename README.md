@@ -7,6 +7,11 @@ To learn [Shoes](http://github.com/shoes/shoes) Inside from scratch. For fun! :-
 But this site is only for Windows.
 Sorry, I have no environments except an old Windows XP laptop.
 
+deps
+----
+
+Download [this](http://www.rin-shun.com/bshoes/deps-for-bshoes-0.r2.zip).
+
 
 Environment
 -----------
