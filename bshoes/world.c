@@ -51,7 +51,7 @@ bshoes_start(char *path, char *uri)
     "begin;"
       "DIR = File.expand_path(File.dirname(%%q<%s>));"
       "$:.replace([DIR+'/ruby/lib/'+RUBY_PLATFORM, DIR+'/ruby/lib', DIR+'/lib', '.']);"
-      "require 'shoes';"
+      "require 'bshoes';"
       "DIR;"
     "rescue Object => e;"
       "puts(e.message);"
