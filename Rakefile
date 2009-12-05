@@ -14,6 +14,7 @@ end
 
 mkdir_p "dist"
 copy_files "deps/ruby/bin/*", "dist/"
+cp_r  "lib", "dist/lib"
 
 SRC = FileList["bshoes/*.c"]
 OBJ = SRC.map{|x| x.gsub(/\.c$/, '.obj')}
