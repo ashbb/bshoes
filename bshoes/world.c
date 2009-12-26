@@ -3,8 +3,24 @@
 #include "bshoes/world.h"
 #include "bshoes/ruby.h"
 #include "bshoes/internal.h"
+#include "bshoes/native.h"
 
 extern "C" {
+
+bshoes_world_t *bshoes_world = NULL;
+  
+bshoes_world_t *
+bshoes_world_alloc()
+{
+  bshoes_world_t *world = BSHOE_ALLOC(bshoes_world_t);
+  BSHOE_MEMZERO(world, bshoes_world_t, 1);
+  world->apps = rb_ary_new();
+  world->msgs = rb_ary_new();
+  world->mainloop = FALSE;
+  rb_gc_register_address(&world->apps);
+  rb_gc_register_address(&world->msgs);
+  return world;
+}
 
 int
 bshoes_ruby_embed()
@@ -21,7 +37,7 @@ bshoes_ruby_embed()
 }
 
 bshoes_code
-bshoes_init()
+bshoes_init(BSHOES_INIT_ARGS)
 {
   int argc;
   char **argv;
@@ -32,6 +48,11 @@ bshoes_init()
   
   bshoes_ruby_embed();
   bshoes_ruby_init();
+  
+  bshoes_world = bshoes_world_alloc();
+  bshoes_world->os.instance = inst;
+  bshoes_world->os.style = style;
+  bshoes_native_init();
 
   bshoes_start(path, "/");
   
@@ -59,6 +80,9 @@ bshoes_start(char *path, char *uri)
     path);
 
   rb_eval_string(bootup);
+  
+  bshoes_native_loop();
+
   return BSHOES_OK;
 }
 
@@ -69,4 +93,3 @@ bshoes_final()
 }
 
 }
-

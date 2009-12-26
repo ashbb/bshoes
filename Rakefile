@@ -2,21 +2,26 @@ require 'rake'
 require 'fileutils'
 include FileUtils
 
+NAME = 'bshoes'
+BIN = "*.obj"
+ruby_v = '1.9.1'
+ext_ruby = "deps/ruby"
+
 def copy_files glob, dir
   FileList[glob].each { |f| cp_r f, dir }
 end
 
 task :default => [:build]
-task :build => ["dist/bshoes.exe"] do
+task :build => ["dist/#{NAME}.exe"] do
   mkdir_p "dist/ruby"
-  cp_r  "deps/ruby/lib/ruby/1.9.1", "dist/ruby/lib"
+  cp_r  "#{ext_ruby}/lib/ruby/#{ruby_v}", "dist/ruby/lib"
 end
 
 mkdir_p "dist"
-copy_files "deps/ruby/bin/*", "dist/"
+copy_files "#{ext_ruby}/bin/*", "dist/"
 cp_r  "lib", "dist/lib"
 
-SRC = FileList["bshoes/*.c"]
+SRC = FileList["bshoes/*.c", "bshoes/native/windows.c"]
 OBJ = SRC.map{|x| x.gsub(/\.c$/, '.obj')}
 
 MSVC_LIBS = 'msvcrt-ruby191.lib user32.lib'
@@ -24,28 +29,27 @@ MSVC_LIBS2 = ' bufferoverflowu.lib'
 MSVC_LIBS << MSVC_LIBS2
 
 MSVC_CFLAGS = %[/MT /DWIN32_LEAN_AND_MEAN
-  /Ideps\\ruby\\lib\\ruby\\1.9.1\\i386-mswin32
+  /Ideps\\ruby\\lib\\ruby\\#{ruby_v}\\i386-mswin32
   /Ideps\\ruby\\include\\ruby-1.9.1
   /Ideps\\ruby\\include\\ruby-1.9.1\\i386-mswin32
-  /I.
+  /I. 
 ].gsub(/\n\s*/, ' ')
+  
+MSVC_LDFLAGS = "/NOLOGO"
 MSVC_CFLAGS << " /I#{ENV['SDK_INC_PATH']}"
 MSVC_CFLAGS << " /I#{ENV['CRT_INC_PATH']}"
-
-MSVC_LDFLAGS = "/NOLOGO"
 MSVC_LDFLAGS << " /LIBPATH:#{ENV['SDK_LIB_PATH'][0..-2]}\i386"
 MSVC_LDFLAGS << " /LIBPATH:#{ENV['CRT_LIB_PATH'][0..-2]}\i386"
 
-
-task "dist/bshoes.exe" => ["dist/libbshoes.dll", "bin/main.obj"] do |t|
+task "dist/#{NAME}.exe" => ["dist/lib#{NAME}.dll", "bin/main.obj"] do |t|
   rm_f t.name
   sh "link #{MSVC_LDFLAGS} /OUT:#{t.name} /LIBPATH:dist " +
-    "/SUBSYSTEM:WINDOWS bin/main.obj libbshoes.lib #{MSVC_LIBS2}"
+    "/SUBSYSTEM:WINDOWS bin/main.obj lib#{NAME}.lib #{MSVC_LIBS2}"
 end
 
-task "dist/libbshoes.dll" => OBJ do |t|
+task "dist/lib#{NAME}.dll" => OBJ do |t|
   sh "link #{MSVC_LDFLAGS} /OUT:#{t.name} /dll " +
-    "/LIBPATH:deps/ruby/lib " + 
+    "/LIBPATH:#{ext_ruby}/lib " + 
     "#{OBJ.join(' ')} #{MSVC_LIBS}"
 end
 

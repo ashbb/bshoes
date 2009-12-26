@@ -5,7 +5,7 @@
 int WINAPI
 WinMain(HINSTANCE inst, HINSTANCE inst2, LPSTR arg, int style)
 {
-  bshoes_init();
+  bshoes_init(inst, style);
   bshoes_final();
   return 0;
 }
