@@ -13,7 +13,7 @@ BSHOES_EXTERN typedef struct _bshoes_world_t {
   VALUE apps, msgs;
 } bshoes_world_t;
 
-extern BSHOES_EXTERN bshoes_world_t *bshoes_world;
+BSHOES_EXTERN bshoes_world_t *bshoes_world;
 
 BSHOES_EXTERN bshoes_world_t *bshoes_world_alloc(void);
 BSHOES_EXTERN void bshoes_world_free(bshoes_world_t *);

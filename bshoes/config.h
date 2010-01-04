@@ -8,9 +8,8 @@
 typedef struct {
   HINSTANCE instance;
   int style;
-  HWND hidden;
   WNDCLASSEX classex;
   ATOM classatom;
-} bshoes_world_win32, BSHOES_WORLD_OS;
+} BSHOES_WORLD_OS;
 
 #endif

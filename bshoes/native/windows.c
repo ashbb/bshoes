@@ -6,9 +6,6 @@
 #include "bshoes/code.h"
 #include "bshoes/world.h"
 
-bshoes_code bshoes_classex_init();
-LRESULT CALLBACK bshoes_app_win32proc(HWND, UINT, WPARAM, LPARAM);
-
 LRESULT CALLBACK
 bshoes_app_win32proc(HWND win, UINT msg, WPARAM w, LPARAM l)
 {
