@@ -10,14 +10,10 @@ Sorry, I have no environments except an old Windows XP laptop.
 deps
 ----
 
-Download [deps-for-bshoes-0.r5.zip](http://www.rin-shun.com/bshoes/deps-for-bshoes-0.r5.zip).
+Download xxx.
 
 
 Environment
 -----------
 
-- Windows Driver Kit Version 7.0.0 (WDK)
-- Visual C++ 2008 Express Edition
-- Ruby 1.9.1
-
-See [this](http://github.com/ashbb/shoes_hack_note/blob/master/md/hack006.md).
+See [Building Shoes with MinGW](http://github.com/ashbb/shoes_hack_note/blob/master/md/hack019.md).

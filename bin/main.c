@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <windows.h>
-#include "bshoes/world.h"
 
 int WINAPI
 WinMain(HINSTANCE inst, HINSTANCE inst2, LPSTR arg, int style)
 {
-  bshoes_init(inst, style);
-  bshoes_final();
+  MessageBox(NULL, "hello world", "Baby Shoes", 0);
   return 0;
 }

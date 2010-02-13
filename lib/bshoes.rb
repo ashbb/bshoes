@@ -1,3 +1,0 @@
-# bshoes.rb
-
-BShoes.app
