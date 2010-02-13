@@ -10,7 +10,7 @@ Sorry, I have no environments except an old Windows XP laptop.
 deps
 ----
 
-Download xxx.
+Download [deps-for-bshoes-mingw.zip](http://www.rin-shun.com/bshoes/deps-for-bshoes-mingw.zip).
 
 
 Environment
