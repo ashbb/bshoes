@@ -5,6 +5,7 @@
 #include "bshoes/config.h"
 
 BSHOES_EXTERN bshoes_code bshoes_init(void);
+BSHOES_EXTERN bshoes_code bshoes_start(char *, char *);
 BSHOES_EXTERN bshoes_code bshoes_final(void);
 
 #endif
