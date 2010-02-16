@@ -6,7 +6,7 @@ IDIRS = '-I. -Ideps/ruby/include/ruby-1.9.1 -Ideps/ruby/include/ruby-1.9.1/i386-
 task :default => 'dist/bshoes.exe'
 
 task 'dist/bshoes.exe' => ['dist/libbshoes.dll', 'bin/main.o'] do |t|
-  sh "gcc -o #{t.name} bin/main.o -Ldist -lbshoes -mwindows"
+  sh "g++ -o #{t.name} bin/main.o -Ldist -lbshoes -mwindows"
 end
 
 task "dist/libbshoes.dll" => OBJ do |t|
@@ -15,9 +15,9 @@ task "dist/libbshoes.dll" => OBJ do |t|
   cp_r 'deps/ruby/lib/ruby/1.9.1', 'dist/ruby/lib'
   cp 'deps/ruby/bin/msvcrt-ruby191.dll', 'dist'
   cp_r 'lib', 'dist/lib'
-  sh "gcc -shared -o #{t.name} #{OBJ.join ' '} -Ldeps/ruby/lib -lmsvcrt-ruby191.dll"
+  sh "g++ -shared -o #{t.name} #{OBJ.join ' '} -Ldeps/ruby/lib -lmsvcrt-ruby191.dll"
 end
 
 rule ".o" => ".c" do |t|
-  sh "gcc #{IDIRS} -c -o #{t.name} #{t.source}"
+  sh "g++ #{IDIRS} -c -o #{t.name} #{t.source}"
 end

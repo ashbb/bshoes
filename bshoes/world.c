@@ -23,7 +23,7 @@ bshoes_start(char *path, char *uri)
 {
   char bootup[BSHOES_BUFSIZE];
 
-  int len = bshoes_snprintf(bootup,
+  bshoes_snprintf(bootup,
     BSHOES_BUFSIZE,
     "begin;"
       "DIR = File.expand_path(File.dirname(%%q<%s>));"
